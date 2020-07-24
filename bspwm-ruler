@@ -168,8 +168,6 @@ active_windows_alpha() {
 		sed -i -e "/\bactive-opacity =/ s/=.*$/= 1;/" ~/.config/picom.conf
 	elif [ "$alpa_wanted" = "0" ]; then
 		sed -i -e "/\bactive-opacity =/ s/=.*$/= $alpha_wanted;/" ~/.config/picom.conf
-	elif [ "$alpha_wanted" -lt 10]; then
-		sed -i -e "/\bactive-opacity =/ s/=.*$/= 0.0$alpha_wanted;/" ~/.config/picom.conf
 	else
 		sed -i -e "/\bactive-opacity =/ s/=./*$/= 0.$alpha_wanted;/" ~/.config/picom.conf
 	fi
@@ -183,8 +181,6 @@ inactive_windows_alpha() {
 		sed -i -e "/inactive-opacity =/ s/=.*$/= 1;/" ~/.config/picom.conf
 	elif [ "$alpa_wanted" = "0" ]; then
 		sed -i -e "/inactive-opacity =/ s/=.*$/= $alpha_wanted;/" ~/.config/picom.conf
-	elif [ "$alpha_wanted" -lt 10]; then
-		sed -i -e "/inactive-opacity =/ s/=.*$/= 0.0$alpha_wanted;/" ~/.config/picom.conf
 	else
 		sed -i -e "/inactive-opacity =/ s/=./*$/= 0.$alpha_wanted;/" ~/.config/picom.conf
 	fi
@@ -332,6 +328,9 @@ alpha_menu() {
 		1)
 			echo ""
 			echo -e "$CHANGEALPHA"
+			echo -e "      Use FF for 100% or full opacity"
+		    echo -e "  Use double digits for values less than 10"
+		    echo -e " Ex: 01 instead of 1, 02 instead of 2, etc..."
 			echo ""
 			read alpha_wanted
 			panel_alpha
@@ -340,8 +339,8 @@ alpha_menu() {
 		2)
 		    echo ""
 		    echo -e "$CHANGEALPHA"
-		    echo -e "    Use 1 for full opacity"
-		    echo -e "  Use 01 for 10% transparency"
+		    echo -e "  Use double digits for values less than 10"
+		    echo -e " Ex: 01 instead of 1, 02 instead of 2, etc..."
 		    echo ""
 		    read alpha_wanted
 		    active_windows_alpha
@@ -350,6 +349,8 @@ alpha_menu() {
 		3)
 			echo ""
 			echo -e "$CHANGEALPHA"
+		    echo -e "  Use double digits for values less than 10"
+		    echo -e " Ex: 01 instead of 1, 02 instead of 2, etc..."
 			echo ""
 			read alpha_wanted
 			inactive_windows_alpha
@@ -358,7 +359,7 @@ alpha_menu() {
 		4)
 			echo ""
 			echo ""
-			echo -e "  The dmenu window is tied to the\n   inactive window opacity level.\n\n Changing this setting will overwrite\n   ALL previous focus-exclude rules."
+			echo -e "  The menu window is tied to the\n   inactive window opacity level.\n\n Changing this setting will overwrite\n   ALL previous focus-exclude rules."
 			echo ""
 			echo -e "Press 0 for transparent and 1 for opaque"
 			read alpha_wanted
