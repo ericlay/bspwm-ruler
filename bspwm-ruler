@@ -109,7 +109,7 @@ bspc config $tog $toggle
 #COLORS MENU ###
 window_title_color() {
 	alpha_placeholder=`grep COLOR_TITLE_HACK ~/.limepanelrc | cut -c 20-21`
-	sed -i -e "/COLOR_TITLE_HACK=/ s/#\w*/#$alpha_placeholder$color_wanted/" ~/.limepanelrc
+	sed -i -e "/COLOR_TITLE=/ s/#\w*/#$alpha_placeholder$color_wanted/" ~/.limepanelrc
 	bspc wm -r
 	colors_menu
 }
@@ -265,7 +265,7 @@ colors_menu() {
     echo -e " └──────────────────────────────┘"
     echo -e "  Select an item    -    0  Exit "
     echo ""
-	read -s choice
+	read -s -n1 choice
 	case $choice in
 		1)
 			echo ""
@@ -327,7 +327,7 @@ alpha_menu() {
     echo -e " └────────────────────────┘"
     echo -e " Select an item  -  0  Exit "
     echo ""
-	read -s choice
+	read -s -n1 choice
 	case $choice in
 		1)
 			echo ""
@@ -399,7 +399,7 @@ themeMenu() {
     echo -e "            WARNING! "
 	echo -e "Program expects the stock Manjaro\nenvironment applications and file\nlocations as found on new install"
     echo ""
-	read -s choice
+	read -s -n1 choice
 	case $choice in
 		1)
 			echo
@@ -453,7 +453,7 @@ main()
     echo -e " └────────────────────────────────────────────────────────────┘"
     echo -e "                       Select an item "
     echo ""
-    read -s choix
+    read -s -n1 choix
     case $choix in
         1)
             echo
